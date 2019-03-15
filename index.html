@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Generator</title>
+	<style>
+		body {
+			margin: 0 auto;
+			padding: 0;
+			text-align: center;
+			background: #360033;
+		    background: -webkit-linear-gradient(left, #0b8793, #360033);
+		    background: -o-linear-gradient(left, #0b8793, #360033);
+		    background: linear-gradient(to right, #0b8793, #360033);
+		}
+		p {
+			font-family: arial;
+			font-size: 10px;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: .5em;
+			color: #ffffff;
+			text-shadow: 0px 0px 8px black;
+		}
+		.gradient {
+			display: block;
+		}
+
+		.solid {
+			display: none;
+		}
+
+		.toggle {
+			position: absolute;
+			bottom: 10%;
+			left: 50%;
+			transform: translate(-50%,0%);
+		}
+
+
+
+
+
+
+
+		.tgl {
+			display: none;
+		}
+		.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+			box-sizing: border-box;
+		}
+		.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+			background: none;
+		}
+		.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+			background: none;
+		}
+		.tgl + .tgl-btn {
+			outline: 0;
+			display: block;
+			width: 5em;
+			height: 2em;
+			position: relative;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+			position: relative;
+			display: block;
+			content: "";
+			width: 50%;
+			height: 100%;
+		}
+		.tgl + .tgl-btn:after {
+			left: 0;
+		}
+		.tgl + .tgl-btn:before {
+			display: none;
+		}
+		.tgl:checked + .tgl-btn:after {
+			left: 50%;
+		}
+
+
+
+
+
+
+
+
+
+		.tgl-flip + .tgl-btn {
+			padding: 2px;
+			transition: all 0.2s ease;
+			font-family: sans-serif;
+			-webkit-perspective: 100px;
+			perspective: 100px;
+		}
+		.tgl-flip + .tgl-btn:after, .tgl-flip + .tgl-btn:before {
+			display: inline-block;
+			transition: all 0.4s ease;
+			width: 100%;
+			text-align: center;
+			position: absolute;
+			line-height: 2em;
+			font-weight: bold;
+			color: #fff;
+			text-shadow: 0px 0px 8px black;
+			position: absolute;
+			top: 0;
+			left: 0;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+			border-radius: 4px;
+		}
+		.tgl-flip + .tgl-btn:after {
+			content: attr(data-tg-on);
+			background: #02c66f;
+			-webkit-transform: rotateY(-180deg);
+			transform: rotateY(-180deg);
+		}
+		.tgl-flip + .tgl-btn:before {
+			background: transparent;
+			border: 2px solid #7fc6a6;
+			content: attr(data-tg-off);
+		}
+		.tgl-flip + .tgl-btn:active:before {
+			-webkit-transform: rotateY(-20deg);
+			transform: rotateY(-20deg);
+		}
+		.tgl-flip:checked + .tgl-btn:before {
+			-webkit-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+		.tgl-flip:checked + .tgl-btn:after {
+			-webkit-transform: rotateY(0);
+			transform: rotateY(0);
+			left: 0;
+			background: transparent;
+			border: 2px solid #ff3a19;
+		}
+		.tgl-flip:checked + .tgl-btn:active:after {
+			-webkit-transform: rotateY(20deg);
+			transform: rotateY(20deg);
+		}
+
+
+	</style>
+</head>
+<body id="colorforbody">
+	<div class="toggle">
+		<input class="tgl tgl-flip"  id="cb5" type="checkbox"/>
+    	<label class="tgl-btn" onclick="toggleChange()" data-tg-off="Gradient" data-tg-on="Solid" for="cb5"></label>
+	</div>
+	
+
+
+
+
+
+	<div class="gradient">
+		<p>Gradient Colors</p>
+		<input class="color1" type="color" name="color1" value="#0b8793">
+		<input class="color2" type="color" name="color2" value="#360033">
+	</div>
+
+	<div class="solid">
+		<p>Solid Color</p>
+		<input class="solidcolor" type="color" name="color2" value="#360033">
+	</div>
+
+
+
+
+
+
+	<script type="text/javascript">
+		var clr1 = document.querySelector(".color1");
+		var clr2 = document.querySelector(".color2");
+		var div1 = document.querySelector(".gradient");
+		var div2 = document.querySelector(".solid");
+		var solidcolor = document.querySelector(".solidcolor");
+		var body = document.getElementById("colorforbody");
+
+		function setGradient(){
+			body.style.background = "linear-gradient(to right, " + clr1.value + ", " + clr2.value + ")";
+		}
+
+		clr1.addEventListener("input", setGradient);
+
+		clr2.addEventListener("input", setGradient);
+
+		solidcolor.addEventListener("input", function(){
+			body.style.background = solidcolor.value;
+		})
+
+
+		function toggleChange(){
+			if (div1.style.display === "none"){
+				div1.style.display = "block";
+				div2.style.display = "none";
+			} else {
+				div1.style.display = "none";
+				div2.style.display = "block";
+			}
+		}
+
+	</script>
+</body>
+</html>
