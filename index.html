@@ -39,6 +39,21 @@
 			transform: translate(-50%,0%);
 		}
 
+		button {
+			position: absolute;
+			bottom: 15%;
+			left: 50%;
+			transform: translate(-50%,0%);
+			font-family: arial;
+			font-size: 13px;
+			font-weight: bold;
+			padding: 15px 10px;
+			background: none;
+			border-radius: 20px;
+			color: #fff;
+			text-shadow: 0px 0px 8px black;
+		}
+
 
 
 
@@ -153,11 +168,14 @@
 	</style>
 </head>
 <body id="colorforbody">
+
+
+	<button onclick="setRandomColor()">Random Color</button>
+
 	<div class="toggle">
 		<input class="tgl tgl-flip"  id="cb5" type="checkbox"/>
     	<label class="tgl-btn" onclick="toggleChange()" data-tg-off="Gradient" data-tg-on="Solid" for="cb5"></label>
 	</div>
-	
 
 
 
@@ -186,6 +204,28 @@
 		var div2 = document.querySelector(".solid");
 		var solidcolor = document.querySelector(".solidcolor");
 		var body = document.getElementById("colorforbody");
+
+		function getRandomColor1() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+
+		function getRandomColor2() {
+			var letters = '0123456789ABCDEF';
+			var color = '#';
+			for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+
+		function setRandomColor() {
+			body.style.background = "linear-gradient(to right, " + getRandomColor1() + ", " + getRandomColor2() + ")";
+		}
 
 		function setGradient(){
 			body.style.background = "linear-gradient(to right, " + clr1.value + ", " + clr2.value + ")";
